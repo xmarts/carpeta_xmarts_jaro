@@ -33,3 +33,24 @@ class jarochito(models.Model):
     flete_externo = fields.Boolean(string="Flete externo", default=False)
     pagan_tarimas = fields.Boolean(string="Pagan Tarimas", default=False)
     pagan_maniobras = fields.Boolean(string="Pagan maniobras", default=False)
+
+
+class SaleOrder(models-.Model):
+  _inherit = "sale.order"
+
+  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", default=False)
+  flete_externo_ven = fields.Boolean(string="Flete externo", default=False)
+  pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", default=False)
+  pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", default=False)
+
+  @api.onchange('partner_id')
+  def _function_contacts(self):
+    if self.partner_id:
+      if self.partner_id.dejan_tarimas == True:
+        self.dejan_tarimas_ven = True
+      if self.partner_id.flete_externo == True:
+        self.flete_externo_ven = True
+      if self.partner_id.pagan_tarimas == True:
+        self.pagan_tarimas_ven = True
+      if self.partner_id..pagan_maniobras == True:
+        self.pagan_maniobras_ven = True

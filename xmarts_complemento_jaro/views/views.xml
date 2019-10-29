@@ -27,5 +27,25 @@
         </xpath>
       </field>
     </record>
+
+    <record model='ir.ui.view' id="xmarts_jarochito_ventas">
+      <field name="name">xmarts.jarochito.ventas</field>
+      <field name="model">sale.order</field>
+      <field name="inherit_id" ref="sale.view_order_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//notebook/page[@name='other_information']" position="after">
+          <page string="Información adicional" name="info_adicional">
+            <group>
+              <group>
+                <field name="dejan_tarimas_ven"/>
+                <field name="flete_externo_ven"/>
+                <field name="pagan_tarimas_ven"/>
+                <field name="pagan_maniobras_ven"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
+      </field>
+    </record>
   </data>
 </odoo>
