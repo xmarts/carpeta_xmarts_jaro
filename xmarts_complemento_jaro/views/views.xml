@@ -5,12 +5,13 @@
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="base.view_partner_form" />
       <field name="arch" type="xml">
-        <xpath expr="//notebook/page[@name='sales_purchases']/group/group[@name='purchase']/field[@name='property_purchase_currency_id']" position="after">
-            <br/>
+        <xpath expr="//notebook/page[@name='sales_purchases']/group/group[3]" position="before">
+          <group>
             <field name="cod_comprador"/>
             <field name="cod_almacen"/>
             <field name="group_contable_pro"/>
             <field name="group_contable_neg"/>
+          </group>
         </xpath>
         <xpath expr="//page[@name='sales_purchases']" position="after">
           <page string="Información adicional" name="info_adi">
