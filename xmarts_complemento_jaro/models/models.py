@@ -35,7 +35,7 @@ class jarochito(models.Model):
     pagan_maniobras = fields.Boolean(string="Pagan maniobras", default=False)
 
 
-class SaleOrder(models-.Model):
+class SaleOrder(models.Model):
   _inherit = "sale.order"
 
   dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", default=False)
