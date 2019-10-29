@@ -1,0 +1,31 @@
+<odoo>
+  <data>
+    <record model='ir.ui.view' id="xmarts_jarochito_contactos">
+      <field name="name">xmarts.jarochito.contactos</field>
+      <field name="model">res.partner</field>
+      <field name="inherit_id" ref="base.view_partner_form" />
+      <field name="arch" type="xml">
+        <xpath expr="//notebook/page[@name='sales_purchases']/group/group[3]" position="after">
+          <group>
+            <field name="cod_comprador"/>
+            <field name="cod_almacen"/>
+            <field name="group_contable_pro"/>
+            <field name="group_contable_neg"/>
+          </group>
+        </xpath>
+        <xpath expr="//page[@name='sales_purchases']" position="after">
+          <page string="Información adicional" name="info_adi">
+            <group>
+              <group>
+                <field name="dejan_tarimas"/>
+                <field name="flete_externo"/>
+                <field name="pagan_tarimas"/>
+                <field name="pagan_maniobras"/>
+              </group>
+            </group>
+          </page>
+        </xpath>
+      </field>
+    </record>
+  </data>
+</odoo>
