@@ -43,7 +43,7 @@ class SaleOrder(models.Model):
   pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", default=False)
   pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", default=False)
 
-  @api.onchange('partner_id')
+  '''@api.onchange('partner_id')
   def _function_contacts(self):
     if self.partner_id:
       if self.partner_id.dejan_tarimas == True:
@@ -53,4 +53,4 @@ class SaleOrder(models.Model):
       if self.partner_id.pagan_tarimas == True:
         self.pagan_tarimas_ven = True
       if self.partner_id..pagan_maniobras == True:
-        self.pagan_maniobras_ven = True
+        self.pagan_maniobras_ven = True'''
