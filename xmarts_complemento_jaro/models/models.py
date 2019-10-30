@@ -42,3 +42,9 @@ class SaleOrder(models.Model):
   flete_externo_ven = fields.Boolean(string="Flete externo", default=False)
   pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", default=False)
   pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", default=False)
+
+  @api.one
+  def funcion_valor_contactos(self):
+    for record in self:
+      if record.partner_id:
+        record.deja_tarimas_ven = True
