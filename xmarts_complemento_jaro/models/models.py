@@ -38,7 +38,7 @@ class jarochito(models.Model):
 class SaleOrder(models.Model):
   _inherit = 'sale.order'
 
-  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", default=False)
+  dejan_tarimas_ven = fields.Boolean(compute="funcion_valor_contactos", string="Dejan Tarimas", default=False)
   flete_externo_ven = fields.Boolean(string="Flete externo", default=False)
   pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", default=False)
   pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", default=False)
@@ -47,4 +47,5 @@ class SaleOrder(models.Model):
   def funcion_valor_contactos(self):
     for record in self:
       if record.partner_id:
-        record.deja_tarimas_ven = True
+        if record.partner_id.dejan_tarimas != False:
+          record.deja_tarimas_ven = True
