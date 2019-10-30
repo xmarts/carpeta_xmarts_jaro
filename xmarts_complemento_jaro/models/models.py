@@ -38,19 +38,7 @@ class jarochito(models.Model):
 class SaleOrder(models.Model):
   _inherit = 'sale.order'
 
-  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", default=False, compute="_get_contacts")
-  flete_externo_ven = fields.Boolean(string="Flete externo", default=False, compute="_get_contacts")
-  pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", default=False, compute="_get_contacts")
-  pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", default=False, compute="_get_contacts")
-
-  @api.one
-  def _get_contacts(self):
-    if self.partner_id:
-      if self.partner_id.dejan_tarimas == True:
-        self.dejan_tarimas_ven = True
-      if self.partner_id.flete_externo == True:
-        self.flete_externo_ven = True
-      if self.partner_id.pagan_tarimas == True:
-        self.pagan_tarimas_ven = True
-      if self.partner_id..pagan_maniobras == True:
-        self.pagan_maniobras_ven = True
+  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", default=False)
+  flete_externo_ven = fields.Boolean(string="Flete externo", default=False)
+  pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", default=False)
+  pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", default=False)
