@@ -46,8 +46,7 @@ class SaleOrder(models.Model):
   @api.one
   def funcion_valor_contactos(self):
     for record in self:
-      if record.partner_id:
-        if record.partner_id.dejan_tarimas == True:
-          record.deja_tarimas_ven = True
-        else:
-          record.flete_externo_ven = True
+      if record.partner_id.dejan_tarimas == True:
+        record.deja_tarimas_ven = True
+      else:
+        record.flete_externo_ven = True
