@@ -38,12 +38,11 @@ class jarochito(models.Model):
 class SaleOrder(models.Model):
   _inherit = 'sale.order'
 
-  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas")
+  dejan_tarimas_ven = fields.Boolean(compute="funcion_valor_contactos", string="Dejan Tarimas")
   flete_externo_ven = fields.Boolean(string="Flete externo")
   pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas")
   pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras")
 
-  @api.onchange('partner_id')
+  @api.depends('partner_id')
   def funcion_valor_contactos(self):
-    if self.partner_id:
-      if self.dejan_tarimas_ven = True
+    if self.dejan_tarimas_ven = True
