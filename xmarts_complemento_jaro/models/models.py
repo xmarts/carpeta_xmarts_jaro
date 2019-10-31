@@ -38,10 +38,10 @@ class jarochito(models.Model):
 class SaleOrder(models.Model):
   _inherit = 'sale.order'
 
-  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas")
-  flete_externo_ven = fields.Boolean(string="Flete externo")
-  pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas")
-  pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras")
+  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", readonly=True)
+  flete_externo_ven = fields.Boolean(string="Flete externo", readonly=True)
+  pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", readonly=True)
+  pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", readonly=True)
 
   @api.onchange('partner_id')
   def onchange_valor_contactos(self):
