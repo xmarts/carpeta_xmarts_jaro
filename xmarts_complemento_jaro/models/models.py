@@ -6,7 +6,7 @@ class jarochito(models.Model):
     _inherit = "res.partner"
 
     cod_comprador = fields.Selection([('1','Alberto Burgos'),
-                                        ('2','Angela Ramos'),
+                                      ('2','Angela Ramos'),
                                       ('3','Esmeralda Romero'),
                                       ('4','Bonifilio Matías'),
                                       ('5','Cesar Prado'),
@@ -42,3 +42,8 @@ class SaleOrder(models.Model):
   flete_externo_ven = fields.Boolean(string="Flete externo")
   pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas")
   pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras")
+
+  @api.onchange('partner_id')
+  def onchange_valor_contactos(self):
+    if self.partner_id:
+      self.dejan_tarimas_ven = True
