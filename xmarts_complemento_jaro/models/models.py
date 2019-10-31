@@ -38,7 +38,7 @@ class jarochito(models.Model):
 class SaleOrder(models.Model):
   _inherit = 'sale.order'
 
-  dejan_tarimas_ven = fields.Boolean(compute="funcion_valor_contactos", string="Dejan Tarimas")
+  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas")
   flete_externo_ven = fields.Boolean(string="Flete externo")
   pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas")
   pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras")
