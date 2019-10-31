@@ -47,9 +47,17 @@ class SaleOrder(models.Model):
   def onchange_valor_contactos(self):
     if self.partner_id.dejan_tarimas == True:
       self.dejan_tarimas_ven = True
+    else:
+      self.dejan_tarimas_ven = False
     if self.partner_id.flete_externo == True:
       self.flete_externo_ven = True
+    else:
+      self.flete_externo_ven = False
     if self.partner_id.pagan_tarimas == True:
       self.pagan_tarimas_ven = True
+    else:
+      self.pagan_tarimas_ven = False
     if self.partner_id.pagan_maniobras == True:
-      self.pagan_maniobras_ven = True  
+      self.pagan_maniobras_ven = True
+    else:
+      self.pagan_maniobras_ven =  False
