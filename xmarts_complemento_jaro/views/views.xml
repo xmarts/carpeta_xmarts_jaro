@@ -53,7 +53,7 @@
       <field name="model">res.partner</field>
       <field name="inherit_id" ref="account.view_partner_property_form" />
       <field name="arch" type="xml">
-        <xpath expr="//field[@name='mx_edi_usage]" position="after">
+        <xpath expr="//field[@name='mx_edi_usage']" position="after">
           <field name="forma_pago"/>
         </xpath> 
       </field>
