@@ -61,3 +61,10 @@ class SaleOrder(models.Model):
       self.pagan_maniobras_ven = True
     else:
       self.pagan_maniobras_ven =  False
+
+class AccountInvoice(models.Model):
+  _inherit = 'account.invoice'
+
+  @api.onchange('partner_id')
+  def onchange_partner_id(self):
+    self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
