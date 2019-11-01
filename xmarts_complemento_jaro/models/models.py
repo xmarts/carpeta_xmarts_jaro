@@ -33,6 +33,7 @@ class jarochito(models.Model):
     flete_externo = fields.Boolean(string="Flete externo", default=False)
     pagan_tarimas = fields.Boolean(string="Pagan Tarimas", default=False)
     pagan_maniobras = fields.Boolean(string="Pagan maniobras", default=False)
+    campo_prueba = fields.Char(string="Prueba")
 
 class SaleOrder(models.Model):
   _inherit = 'sale.order'

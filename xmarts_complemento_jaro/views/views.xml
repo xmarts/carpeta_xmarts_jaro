@@ -25,6 +25,9 @@
             </group>
           </page>
         </xpath>
+        <xpath expr="//field[@name='l10n_mx_edi_factoring_id']" position="after">
+          <field name="campo_prueba"/>
+        </xpath>
       </field>
     </record>
 
