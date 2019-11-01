@@ -33,7 +33,7 @@ class jarochito(models.Model):
     flete_externo = fields.Boolean(string="Flete externo", default=False)
     pagan_tarimas = fields.Boolean(string="Pagan Tarimas", default=False)
     pagan_maniobras = fields.Boolean(string="Pagan maniobras", default=False)
-    campo_prueba = fields.Char(string="Prueba")
+    l10n_mx_edi_payment_method_id = fields.Many2one('l10n_mx_edi.payment.method', string="Forma de pago")
 
 class SaleOrder(models.Model):
   _inherit = 'sale.order'
