@@ -34,6 +34,8 @@ class jarochito(models.Model):
     pagan_tarimas = fields.Boolean(string="Pagan Tarimas", default=False)
     pagan_maniobras = fields.Boolean(string="Pagan maniobras", default=False)
 
+    forma_pago = fields.Char(string="Campo de prueba")
+
 
 class SaleOrder(models.Model):
   _inherit = 'sale.order'
