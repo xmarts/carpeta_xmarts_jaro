@@ -91,11 +91,6 @@ class SaleOrder(models.Model):
     else:
       self.pagan_maniobras_ven =  False
 
-class StockPicking(models.Model):
-  _inherit = "stock.picking"
-
-  campo_prueba = fields.Char(string="Campo de prueba")
-
 class AccountInvoice(models.Model):
   _inherit = 'account.invoice'
 
@@ -106,3 +101,13 @@ class AccountInvoice(models.Model):
       self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
     else:
       self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
+
+class StockPicking(models.Model):
+  _inherit = "stock.picking"
+
+  @api.onchange('move_ids_without_package')
+  def onchange_stock_quant(self):
+    for line in self.route_moves:
+      ruta = self.env['stock.quant'].search([('product_id','=', line.product_id.id),('location_id','=',self.location_dest_id)])
+    if ruta:
+      line.product_uom_qty = ruta.quantity
