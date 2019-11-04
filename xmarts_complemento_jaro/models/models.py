@@ -102,9 +102,9 @@ class AccountInvoice(models.Model):
     else:
       self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
   
-  @api.one 
-  def product_pos(self):
+  @api.onchange('route_moves')
+  def onchange_stock_quant(self):
     for line in self.route_moves:
       ruta = self.env['stock.quant'].search([('product_id','=', line.product_id.id),('location_id','=',self.location_dest_id)])
     if ruta:
-      raise ValidationError(ruta.quantity)
+      line.product_uom_qty = ruta.quantity
