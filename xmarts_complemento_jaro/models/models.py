@@ -67,4 +67,8 @@ class AccountInvoice(models.Model):
 
   @api.onchange('partner_id')
   def onchange_partner_id(self):
-    self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
+    if self.type == 'out_refund':
+      self.l10n_mx_edi_usage = self.partner_id.mx_edi_usage
+      self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
+    else:
+      self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
