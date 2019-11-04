@@ -51,5 +51,16 @@
         </xpath>
       </field>
     </record>
+
+    <record model='ir.ui.view' id="xmarts_jarochito_transf_int">
+      <field name="name">xmarts.jarochito.transf.int</field>
+      <field name="model">stock.picking</field>
+      <field name="inherit_id" ref="stock.view_picking_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='partner_id']" position="after">
+          <field name="campo_prueba"/>
+        </xpath>
+      </field>
+    </record>
   </data>
 </odoo>
