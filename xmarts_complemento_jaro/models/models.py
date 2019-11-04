@@ -107,8 +107,6 @@ class StockPicking(models.Model):
 
   @api.onchange('move_ids_without_package')
   def onchange_stock_quant(self):
-    ruta = ''
     for line in self.route_moves:
-      ruta = self.env['stock.quant'].search([('product_id','=', line.product_id.id),('location_id','=',self.location_dest_id)])
-    if ruta:
+      ruta = self.env['stock.quant'].search([('product_id','=', line.product_id.id),('location_id','=',self.location_dest_id.id)])
       line.product_uom_qty = ruta.quantity
