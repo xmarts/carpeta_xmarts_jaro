@@ -102,9 +102,9 @@ class AccountInvoice(models.Model):
     else:
       self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
   
-  @api.one
+  @api.multi
   def button_scrap(self):
-    raise ValidationError('Error')
+    raise ValidationError('Error 2')
     '''for line in self.route_moves:
       ruta = self.env['stock.quant'].search([('product_id','=', line.product_id.id),('location_id','=',self.location_dest_id)])
     if ruta:
