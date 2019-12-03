@@ -32,7 +32,7 @@
       </field>
     </record>
 
-    <record model='ir.ui.view' id="xmarts_jarochito_ventas">
+    <!-- <record model='ir.ui.view' id="xmarts_jarochito_ventas">
       <field name="name">xmarts.jarochito.ventas</field>
       <field name="model">sale.order</field>
       <field name="inherit_id" ref="sale.view_order_form"/>
@@ -50,7 +50,7 @@
           </page>
         </xpath>
       </field>
-    </record>
+    </record> -->
 
   </data>
 </odoo>
