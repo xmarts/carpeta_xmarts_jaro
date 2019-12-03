@@ -30,10 +30,10 @@ class jarochito(models.Model):
     group_contable_pro = fields.Text(string="Grupo contable proveedores")
     group_contable_neg = fields.Text(string="Grupo contable Negocio")
 
-    dejan_tarimas = fields.Boolean(string="Dejan Tarimas", default=False)
-    flete_externo = fields.Boolean(string="Flete externo", default=False)
-    pagan_tarimas = fields.Boolean(string="Pagan Tarimas", default=False)
-    pagan_maniobras = fields.Boolean(string="Pagan maniobras", default=False)
+    # dejan_tarimas = fields.Boolean(string="Dejan Tarimas", default=False)
+    # flete_externo = fields.Boolean(string="Flete externo", default=False)
+    # pagan_tarimas = fields.Boolean(string="Pagan Tarimas", default=False)
+    # pagan_maniobras = fields.Boolean(string="Pagan maniobras", default=False)
     l10n_mx_edi_usage = fields.Selection([
         ('G01', 'Acquisition of merchandise'),
         ('G02', 'Returns, discounts or bonuses'),
@@ -64,32 +64,32 @@ class jarochito(models.Model):
         'not the usage that will give the receiver of the document.')
     l10n_mx_edi_payment_method_id = fields.Many2one('l10n_mx_edi.payment.method', string="Forma de pago")
 
-class SaleOrder(models.Model):
-  _inherit = 'sale.order'
+# class SaleOrder(models.Model):
+#   _inherit = 'sale.order'
 
-  dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", readonly=True)
-  flete_externo_ven = fields.Boolean(string="Flete externo", readonly=True)
-  pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", readonly=True)
-  pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", readonly=True)
+#   dejan_tarimas_ven = fields.Boolean(string="Dejan Tarimas", readonly=True)
+#   flete_externo_ven = fields.Boolean(string="Flete externo", readonly=True)
+#   pagan_tarimas_ven = fields.Boolean(string="Pagan Tarimas", readonly=True)
+#   pagan_maniobras_ven = fields.Boolean(string="Pagan maniobras", readonly=True)
 
-  @api.onchange('partner_id')
-  def onchange_valor_contactos(self):
-    if self.partner_id.dejan_tarimas == True:
-      self.dejan_tarimas_ven = True
-    else:
-      self.dejan_tarimas_ven = False
-    if self.partner_id.flete_externo == True:
-      self.flete_externo_ven = True
-    else:
-      self.flete_externo_ven = False
-    if self.partner_id.pagan_tarimas == True:
-      self.pagan_tarimas_ven = True
-    else:
-      self.pagan_tarimas_ven = False
-    if self.partner_id.pagan_maniobras == True:
-      self.pagan_maniobras_ven = True
-    else:
-      self.pagan_maniobras_ven =  False
+#   @api.onchange('partner_id')
+#   def onchange_valor_contactos(self):
+#     if self.partner_id.dejan_tarimas == True:
+#       self.dejan_tarimas_ven = True
+#     else:
+#       self.dejan_tarimas_ven = False
+#     if self.partner_id.flete_externo == True:
+#       self.flete_externo_ven = True
+#     else:
+#       self.flete_externo_ven = False
+#     if self.partner_id.pagan_tarimas == True:
+#       self.pagan_tarimas_ven = True
+#     else:
+#       self.pagan_tarimas_ven = False
+#     if self.partner_id.pagan_maniobras == True:
+#       self.pagan_maniobras_ven = True
+#     else:
+#       self.pagan_maniobras_ven =  False
 
 class AccountInvoice(models.Model):
   _inherit = 'account.invoice'
