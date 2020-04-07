@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="id_pivot_view_mermas" model="ir.ui.view">
+         <field name="name">mermas.report.pivot</field>
+         <field name="model">mermas.report</field>
+         <field name="arch" type="xml">
+             <pivot string="Mermas" disable_linking="True">
+                 <field name="producto" type="col"/>
+                 <field name="motivo" type="col"/>
+             </pivot>
+         </field>
+    </record>
+
+    <record id="id_graph_view_mermas" model="ir.ui.view">
+         <field name="name">mermas.report.graph</field>
+         <field name="model">mermas.report</field>
+         <field name="arch" type="xml">
+             <graph string="Mermas" type="line">
+                <field name="producto"/>
+                <field name="fecha"/>
+             </graph>
+         </field>
+    </record>
+
+    <record id="id_search_vire_mermas" model="ir.ui.view">
+        <field name="name">mermas.report.search</field>
+        <field name="model">mermas.report</field>
+        <field name="arch" type="xml">
+            <search string="Mermas">
+                <field name="producto"/>
+                <group expand="0" string="Extended Filters">
+                    <field name="producto"/>
+                    <field name="fecha"/>
+                </group>
+            </search>
+        </field>
+    </record> 
+
+    <record id="id_report_mermas" model="ir.actions.act_window">
+        <field name="name">Mermas</field>
+        <field name="res_model">mermas.report</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="search_view_id" ref="id_search_vire_mermas"/>
+       <!--  <field name="context">{'search_default_Sales':1, 'group_by_no_leaf':1,'group_by':[]}</field> -->
+        <field name="help">This report performs analysis on your quotations and sales orders. Analysis check your sales revenues and sort it by different group criteria (salesman, partner, product, etc.) Use this report to perform analysis on sales not having invoiced yet. If you want to analyse your turnover, you should use the Invoice Analysis report in the Accounting application.</field>
+    </record>
+
+<menuitem id="menu_mermas_report"
+            name="Mermas"
+            action="id_report_mermas"
+            parent="stock.menu_warehouse_report"
+            sequence="200"/>
+</odoo>

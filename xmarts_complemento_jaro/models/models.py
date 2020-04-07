@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-
+from odoo import tools
 from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
@@ -110,3 +110,70 @@ class StockPicking(models.Model):
     for line in self.route_moves:
       ruta = self.env['stock.quant'].search([('product_id','=', line.product_id.id),('location_id','=',self.location_dest_id.id)])
       line.product_uom_qty = ruta.quantity
+
+class MotivoStockScrap(models.Model):
+  _name = 'add.motivo'
+
+  name = fields.Char(string="Motivo", required=True)
+
+class StockScraoInherit(models.Model):
+  _inherit = 'stock.scrap'
+
+  motivo = fields.Many2one('add.motivo', string="Motivo")
+
+class ReportMermas(models.Model):
+  _name = "mermas.report"
+  _auto =False
+
+  producto = fields.Char('Producto', readonly=True)
+  fecha = fields.Char('Fecha', readonly=True)
+  motivo = fields.Char('Motivo',readonly=True)
+
+  sabor = fields.Many2one('taste.product')
+  clase = fields.Many2one('class.product')
+  presentacion = fields.Many2one('presentation.product')
+  marca = fields.Many2one('brand.product')
+
+
+  def _query(self, with_clause='', fields={}, groupby='', from_clause=''):
+    with_ = ("WITH %s" % with_clause) if with_clause else ""
+
+    select_ = """
+        pt.name as producto,
+        am.name as motivo,
+        ss.date_expected as fecha,
+        pt.taste_product as sabor, 
+        pt.clase_prod as clase, 
+        pt.presentation_prod as presentacion, 
+        pt.brand_product as marca,
+        ss.id
+    """
+
+    for field in fields.values():
+      select_ += field 
+
+    from_ = """
+        stock_scrap ss
+          left join product_product pp on (pp.id=ss.product_id)
+          left join product_template pt on (pt.id = pp.product_tmpl_id)
+            join add_motivo am on (am.id = motivo)
+        %s
+    """ % from_clause
+
+    groupby_ = """
+        pt.name,
+        am.name,
+        pt.taste_product,
+        pt.clase_prod,
+        pt.presentation_prod,
+        pt.brand_product,
+        ss.id
+        %s
+    """ % (groupby)
+
+    return '%s (SELECT %s FROM %s GROUP BY %s)' % (with_, select_, from_, groupby_)
+  @api.model_cr
+  def init(self):
+    self._table = 'mermas_report'
+    tools.drop_view_if_exists(self.env.cr, self._table)
+    self.env.cr.execute("""CREATE or REPLACE VIEW %s as (%s)""" % (self._table, self._query()))

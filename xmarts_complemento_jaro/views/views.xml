@@ -51,6 +51,16 @@
         </xpath>
       </field>
     </record> -->
-
+<!-- Se agrego un campo nuevo a la vista de Ordenes de Desecho -->
+<record model='ir.ui.view' id="xmarts_jarochito_ordenes_de_desecho">
+      <field name="name">xmarts.jarochito.contactos.ordenes.de.desecho</field>
+      <field name="model">stock.scrap</field>
+      <field name="inherit_id" ref="stock.stock_scrap_form_view"/>
+      <field name="arch" type="xml">
+        <xpath expr="//div[@class='o_row']" position="after">
+            <field name="motivo"/>
+        </xpath>
+      </field>
+    </record>
   </data>
 </odoo>
