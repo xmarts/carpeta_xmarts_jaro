@@ -91,16 +91,16 @@ class jarochito(models.Model):
 #     else:
 #       self.pagan_maniobras_ven =  False
 
-class AccountInvoice(models.Model):
-  _inherit = 'account.invoice'
+# class AccountInvoice(models.Model):
+#   _inherit = 'account.invoice'
 
-  @api.onchange('partner_id')
-  def onchange_partner_id(self):
-    if self.type == 'out_refund':
-      self.l10n_mx_edi_usage = self.partner_id.l10n_mx_edi_usage
-      self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
-    else:
-      self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
+#   @api.onchange('partner_id')
+#   def onchange_partner_id(self):
+#     if self.type == 'out_refund':
+#       self.l10n_mx_edi_usage = self.partner_id.l10n_mx_edi_usage
+#       self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
+#     else:
+#       self.l10n_mx_edi_payment_method_id = self.partner_id.l10n_mx_edi_payment_method_id
 
 class StockPicking(models.Model):
   _inherit = "stock.picking"
