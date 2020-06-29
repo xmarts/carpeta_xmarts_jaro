@@ -126,8 +126,9 @@ class ReportMermas(models.Model):
   _auto =False
 
   producto = fields.Char('Producto', readonly=True)
-  fecha = fields.Char('Fecha', readonly=True)
+  fecha = fields.Date('Fecha', readonly=True)
   motivo = fields.Char('Motivo',readonly=True)
+  ubicacion = fields.Char('Ubicacion', readonly=True)
 
   sabor = fields.Many2one('taste.product')
   clase = fields.Many2one('class.product')
@@ -142,21 +143,24 @@ class ReportMermas(models.Model):
         pt.name as producto,
         am.name as motivo,
         ss.date_expected as fecha,
-        pt.taste_product as sabor, 
-        pt.clase_prod as clase, 
-        pt.presentation_prod as presentacion, 
+        concat(sl2.name,'/',sl.name) as ubicacion,
+        pt.taste_product as sabor,
+        pt.clase_prod as clase,
+        pt.presentation_prod as presentacion,
         pt.brand_product as marca,
         ss.id
     """
 
     for field in fields.values():
-      select_ += field 
+      select_ += field
 
     from_ = """
         stock_scrap ss
           left join product_product pp on (pp.id=ss.product_id)
           left join product_template pt on (pt.id = pp.product_tmpl_id)
-            join add_motivo am on (am.id = motivo)
+          left join add_motivo am on (am.id = motivo)
+          left join stock_location sl on sl.id = ss.location_id
+          left join stock_location sl2 on sl2.id = sl.location_id
         %s
     """ % from_clause
 
@@ -167,6 +171,8 @@ class ReportMermas(models.Model):
         pt.clase_prod,
         pt.presentation_prod,
         pt.brand_product,
+        sl2.name,
+        sl.name,
         ss.id
         %s
     """ % (groupby)
